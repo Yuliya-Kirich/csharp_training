@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using addressbook_web_tests;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -46,10 +47,19 @@ namespace WebAddressbookTests
         public void GroupCreationTest()
         {
             OpenHomePage();
+            //передается не два значения, отдельно, а один объект
             Login(new AccountData("admin", "secret"));
             GoToGroupsPage();
             InitNewGroupCreation();
-            FillGroupForm("question", "answer", "answer2");
+
+            //Без конструктора, но лучше понимаем, т.к. не надо помнить в каком порядке передаются 
+            GroupData group = new GroupData("aaa");
+            group.Header = "ddd";
+            group.Footer = "fff";
+            //Место, где объект конструируется   
+            //В качестве параметра передается объект group
+            FillGroupForm(group);
+
             SubmitGroupCreation();
             ReturToGroupPage();
             Logaut();
@@ -70,14 +80,16 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("submit")).Click();
         }
 
-        private void FillGroupForm(string name, string header, string footer)
+        //Передаем параметр, как объект
+        private void FillGroupForm(GroupData group)
         {
             driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(name);
+            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
             driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(header);                    
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(footer);
+            //А во всех остальных местах, где это свойство не используется, никаких изменений вносить не надо
+            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);                    
+           //driver.FindElement(By.Name("group_footer")).Clear();
+           //driver.FindElement(By.Name("group_footer")).SendKeys(footer);
         }
 
         private void InitNewGroupCreation()
@@ -90,11 +102,15 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
+        //Какие бы параметры мы не добавили, Login принимает один параметр,(объект) типа AccountData
         private void Login(AccountData account)
         {
+            //Используем только нужные свойства объекта, остальные игнорируем. В тех местах, в которым они нужны будут использоваться дополнительные свойства
+
             driver.FindElement(By.Name("user")).Clear();
             driver.FindElement(By.Name("user")).SendKeys(account.Username);
             driver.FindElement(By.Name("pass")).Clear();
+            //В поля вводятся значения свойств этого объекта
             driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
