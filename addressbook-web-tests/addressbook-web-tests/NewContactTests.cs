@@ -66,7 +66,7 @@ namespace WebNewContactTests
 
         private void EnterNewContactCreation()
         {
-            driver.FindElement(By.LinkText("enter")).Click();
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
         private void FilAddNewForm()
