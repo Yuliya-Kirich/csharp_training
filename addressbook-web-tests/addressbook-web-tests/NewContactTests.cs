@@ -47,9 +47,10 @@ namespace WebNewContactTests
         {
             OpenHomePage();
             //передаем параметры логин/пароль
-            Login("admin", "secret");
+            Login(new AccountDataContact("admin", "secret"));
             GoToAddNewPage();
-            FilAddNewForm("Мария", "Попова");
+            NewContactData group = new NewContactData("Мария");
+            FilAddNewForm(new NewContactData("Мария", "Попова"));
             EnterNewContactCreation();
             ReturToHomePage();
             Logout();
@@ -70,12 +71,12 @@ namespace WebNewContactTests
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
-        private void FilAddNewForm(string firstname, string lastname)
+        private void FilAddNewForm(NewContactData group)
         {
             driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(firstname);
+            driver.FindElement(By.Name("firstname")).SendKeys(group.Firstname);
             driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(lastname);
+            driver.FindElement(By.Name("lastname")).SendKeys(group.Lastname);
         }
 
         private void GoToAddNewPage()
@@ -84,12 +85,13 @@ namespace WebNewContactTests
         }
 
         //параметризованный логин, может входить с любым логином/паролем
-        private void Login(string username, string password)
+        private void Login(AccountDataContact account)
         {
             driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(username);
+            //                                          вводятся значения свойств объекта (Username, Password) AccountDataContact
+            driver.FindElement(By.Name("user")).SendKeys(account.Username);
             driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(password);
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
