@@ -46,9 +46,10 @@ namespace WebNewContactTests
         public void TheUntitledTest()
         {
             OpenHomePage();
-            Login();
+            //передаем параметры логин/пароль
+            Login("admin", "secret");
             GoToAddNewPage();
-            FilAddNewForm();
+            FilAddNewForm("Мария", "Попова");
             EnterNewContactCreation();
             ReturToHomePage();
             Logout();
@@ -69,12 +70,12 @@ namespace WebNewContactTests
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
-        private void FilAddNewForm()
+        private void FilAddNewForm(string firstname, string lastname)
         {
             driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys("Мария");
+            driver.FindElement(By.Name("firstname")).SendKeys(firstname);
             driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys("Попова");
+            driver.FindElement(By.Name("lastname")).SendKeys(lastname);
         }
 
         private void GoToAddNewPage()
@@ -82,12 +83,13 @@ namespace WebNewContactTests
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
-        private void Login()
+        //параметризованный логин, может входить с любым логином/паролем
+        private void Login(string username, string password)
         {
             driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys("admin");
+            driver.FindElement(By.Name("user")).SendKeys(username);
             driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys("secret");
+            driver.FindElement(By.Name("pass")).SendKeys(password);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountData.cs" />
+    <Compile Include="AccountDataContact.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="GroupData.cs" />
