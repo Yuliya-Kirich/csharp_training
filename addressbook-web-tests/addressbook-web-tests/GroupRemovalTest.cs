@@ -7,11 +7,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace WebNewContactTests
+namespace WebAddressbookTests
 {
     [TestFixture]
-    public class NewContactTests
-            {
+    public class GroupRemovalTests 
+    {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
         private string baseURL;
@@ -43,61 +43,48 @@ namespace WebNewContactTests
         }
 
         [Test]
-        public void NewContactTest()
+        public void GroupRemovalTest()
         {
-            OpenHomePage();
-            //передаем параметры логин/пароль
-            Login(new AccountDataContact("admin", "secret"));
-            GoToAddNewPage();
-            NewContactData group = new NewContactData("Мария");
-            FilAddNewForm(new NewContactData("Мария", "Попова"));
-            EnterNewContactCreation();
-            ReturToHomePage();
-            Logout();
+            GoToHomePage();
+            Login(new AccountData("admin","secret"));
+            GoToGroupsPage();
+            SelectGroup(1);
+            RemoveGroup();
+            ReturnToGroupsPage();
         }
 
-        private void Logout()
-        {            
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
-
-        private void ReturToHomePage()
+        private void ReturnToGroupsPage()
         {
-            driver.FindElement(By.LinkText("home page")).Click();
+            driver.FindElement(By.LinkText("group page")).Click();
         }
 
-        private void EnterNewContactCreation()
+        private void RemoveGroup()
         {
-            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
         }
 
-        private void FilAddNewForm(NewContactData group)
+        private void SelectGroup(int index)
         {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(group.Firstname);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(group.Lastname);
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])["+ index +"]")).Click();
         }
 
-        private void GoToAddNewPage()
+        private void GoToGroupsPage()
         {
-            driver.FindElement(By.LinkText("add new")).Click();
+            driver.FindElement(By.LinkText("groups")).Click();
         }
 
-        //параметризованный логин, может входить с любым логином/паролем
-        private void Login(AccountDataContact account)
+        private void Login(AccountData account)
         {
             driver.FindElement(By.Name("user")).Clear();
-            //                                          вводятся значения свойств объекта (Username, Password) AccountDataContact
             driver.FindElement(By.Name("user")).SendKeys(account.Username);
             driver.FindElement(By.Name("pass")).Clear();
             driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
-        private void OpenHomePage()
+        private void GoToHomePage()
         {
-            driver.Navigate().GoToUrl(baseURL + "addressbook/edit.php");
+            driver.Navigate().GoToUrl(baseURL + "addressbook/");
         }
 
         private bool IsElementPresent(By by)
@@ -149,3 +136,4 @@ namespace WebNewContactTests
         }
     }
 }
+
