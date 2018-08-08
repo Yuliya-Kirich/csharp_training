@@ -64,11 +64,11 @@
     <Compile Include="Figure.cs" />
     <Compile Include="GroupData.cs" />
     <Compile Include="NewContactData.cs" />
+    <Compile Include="NewContactTests.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GroupCreationTests.cs" />
-    <Compile Include="NewContactTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

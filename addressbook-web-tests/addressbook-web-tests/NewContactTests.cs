@@ -10,8 +10,8 @@ using OpenQA.Selenium.Support.UI;
 namespace WebNewContactTests
 {
     [TestFixture]
-    public class Untitled
-    {
+    public class NewContactTests
+            {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
         private string baseURL;
