@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace WebNewContactTests
+namespace WebAddressbookTests
 {
     [TestClass]
     public class Unitled
