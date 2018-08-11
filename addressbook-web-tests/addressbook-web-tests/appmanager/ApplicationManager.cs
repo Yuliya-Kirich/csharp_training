@@ -8,12 +8,12 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
+
 namespace WebAddressbookTests
 {
-   class TestBase
+    class ApplicationManager
     {
-        protected IWebDriver driver;
-        private StringBuilder verificationErrors;
+        protected IWebDriver driver;        
         protected string baseURL;
 
         protected LoginHelper loginHelper;
@@ -21,26 +21,15 @@ namespace WebAddressbookTests
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
-
-        [SetUp]
-        public void SetupTest()
+        public ApplicationManager()
         {
-            FirefoxOptions options = new FirefoxOptions();
-            options.UseLegacyImplementation = true;
-            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-            driver = new FirefoxDriver(options);
-            baseURL = "http://localhost/";
-            verificationErrors = new StringBuilder();
-
             loginHelper = new LoginHelper(driver);
             navigator = new NavigatorHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
             contactHelper = new ContactHelper(driver);
-
         }
 
-        [TearDown]
-        public void TeardownTest()
+        public void Stop()
         {
             try
             {
@@ -50,9 +39,57 @@ namespace WebAddressbookTests
             {
                 // Ignore errors if unable to close the browser
             }
-            Assert.AreEqual("", verificationErrors.ToString());
+          
         }
 
-        
+        public void SetupTest()
+        {
+
+            FirefoxOptions options = new FirefoxOptions();
+            options.UseLegacyImplementation = true;
+            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            driver = new FirefoxDriver(options);
+            baseURL = "http://localhost/";
+           
+
+            loginHelper = new LoginHelper(driver);
+            navigator = new NavigatorHelper(driver, baseURL);
+            groupHelper = new GroupHelper(driver);
+            contactHelper = new ContactHelper(driver);
+
+        }
+
+        public LoginHelper Auth
+        {
+            get
+            {
+                return loginHelper;
+            }
+        }
+
+        public NavigatorHelper Navigator
+        {
+            get
+            {
+                return navigator;
+            }
+        }
+
+        public GroupHelper Groups
+        {
+            get
+            {
+                return groupHelper;
+            }
+        }
+
+        public ContactHelper Contact
+        {
+            get
+            {
+                return contactHelper;
+            }
+        }
+
     }
 }

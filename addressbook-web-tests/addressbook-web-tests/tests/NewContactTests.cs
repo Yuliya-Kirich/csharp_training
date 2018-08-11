@@ -3,9 +3,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
@@ -15,15 +12,15 @@ namespace WebAddressbookTests
         [Test]
         public void NewContactTest()
         {
-        navigator.GoToHomePage();
+        app.Navigator.GoToHomePage();
             //передаем параметры логин/пароль
-        loginHelper.Login(new AccountData("admin", "secret"));
-        navigator.GoToAddNewPage();
+        app.Auth.Login(new AccountData("admin", "secret"));
+        app.Navigator.GoToAddNewPage();
         NewContactData group = new NewContactData("Мария");
-        contactHelper.FilAddNewForm(new NewContactData("Мария", "Попова"));
-        contactHelper.EnterNewContactCreation();
-        navigator.ReturToHomePage();
-        loginHelper.Logout();
+        app.Contact.FilAddNewForm(new NewContactData("Мария", "Попова"));
+        app.Contact.EnterNewContactCreation();
+        app.Navigator.ReturToHomePage();
+        app.Auth.Logout();
          }
     }
 }
