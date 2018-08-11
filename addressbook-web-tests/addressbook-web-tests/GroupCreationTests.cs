@@ -16,11 +16,11 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            GoToHomePage();
+            navigator.GoToHomePage();
             //передается не два значения, отдельно, а один объект
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            InitNewGroupCreation();
+            loginHelper.Login(new AccountData("admin", "secret"));
+            navigator.GoToGroupsPage();
+            groupHelper.InitNewGroupCreation();
 
             //Без конструктора, но лучше понимаем, т.к. не надо помнить в каком порядке передаются 
             GroupData group = new GroupData("aaa");
@@ -28,11 +28,11 @@ namespace WebAddressbookTests
             group.Footer = "fff";
             //Место, где объект конструируется   
             //В качестве параметра передается объект group
-            FillGroupForm(group);
+            groupHelper.FillGroupForm(group);
 
-            SubmitGroupCreation();
-            ReturToGroupPage();
-            Logout();
+            groupHelper.SubmitGroupCreation();
+            groupHelper.ReturToGroupPage();
+            loginHelper.Logout();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WebAddressbookTests
 {
     // Класс содержит информацию об имене
-    class GroupData
+    public class GroupData
     {
         private string name;
         //Добавлено свойство с дефолтным (пустым) значением.
