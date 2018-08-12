@@ -11,8 +11,10 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    class ApplicationManager
+    public class ApplicationManager 
     {
+
+                        
         protected IWebDriver driver;        
         protected string baseURL;
 
@@ -23,10 +25,16 @@ namespace WebAddressbookTests
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigatorHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            FirefoxOptions options = new FirefoxOptions();
+            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            options.UseLegacyImplementation = true;
+            driver = new FirefoxDriver(options);
+            baseURL = "http://localhost";
+
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigatorHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
         }
 
         public void Stop()
@@ -42,21 +50,14 @@ namespace WebAddressbookTests
           
         }
 
-        public void SetupTest()
+        
+
+        public IWebDriver Driver
         {
-
-            FirefoxOptions options = new FirefoxOptions();
-            options.UseLegacyImplementation = true;
-            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-            driver = new FirefoxDriver(options);
-            baseURL = "http://localhost/";
-           
-
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigatorHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
-
+            get
+            {
+                return driver;
+            }
         }
 
         public LoginHelper Auth
@@ -91,5 +92,6 @@ namespace WebAddressbookTests
             }
         }
 
+      
     }
 }

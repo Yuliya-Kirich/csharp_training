@@ -13,24 +13,31 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            app.Navigator.GoToHomePage();
-            //передается не два значения, отдельно, а один объект
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigator.GoToGroupsPage();
-            app.Groups.InitNewGroupCreation();
-
             //Без конструктора, но лучше понимаем, т.к. не надо помнить в каком порядке передаются 
             GroupData group = new GroupData("aaa");
             group.Header = "ddd";
             group.Footer = "fff";
+
             //Место, где объект конструируется   
             //В качестве параметра передается объект group
-            app.Groups.FillGroupForm(group);
+            app.Groups.Create(group);
+            app.Auth.Logout();
+        }
 
-            app.Groups.SubmitGroupCreation();
-            app.Groups.ReturToGroupPage();
+        [Test]
+        public void EnptyGroupCreationTest()
+        {
+            // Без конструктора, но лучше понимаем, т.к.не надо помнить в каком порядке передаются
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+
+            //Место, где объект конструируется   
+            //В качестве параметра передается объект group
+            app.Groups.Create(group);
             app.Auth.Logout();
         }
     }
+
 }
 

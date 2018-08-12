@@ -13,8 +13,8 @@ namespace WebAddressbookTests
     public class ContactHelper: HelperBase
     {
         
-        public ContactHelper(IWebDriver driver) 
-            :base(driver)
+        public ContactHelper(ApplicationManager manager) 
+            :base(manager)
         {
         }
 

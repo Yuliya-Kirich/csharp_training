@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-   class TestBase
+   class TestBase 
     {
         protected ApplicationManager app;
 
@@ -17,6 +17,9 @@ namespace WebAddressbookTests
         {
 
             app = new ApplicationManager();
+            //передается не два значения, отдельно, а один объект
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
         }
 
         [TearDown]
@@ -25,6 +28,6 @@ namespace WebAddressbookTests
             app.Stop();
         }
 
-        
+       
     }
 }
