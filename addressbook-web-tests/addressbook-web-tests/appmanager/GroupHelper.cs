@@ -19,42 +19,25 @@ namespace WebAddressbookTests
         {
         }
 
-
-        public GroupHelper RemoveGroup()
+        /*
+        public GroupHelper Create(GroupData group)
         {
-            driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
+
+            manager.Navigator.GoToHomePage();
+
+            InitNewGroupCreation();
+            FillGroupForm(group);
+            RemoveGroup();
+            SubmitGroupCreation();
+            ReturnToGroupsPage();
+            SelectGroup(1);
             return this;
         }
-
+        */
+       
         public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
-            return this;
-        }
-
-        public GroupHelper ReturToGroupPage()
-        {
-            driver.FindElement(By.LinkText("group page")).Click();
-            return this;
-        }
-
-        public GroupHelper SubmitGroupCreation()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-            return this;
-        }
-
-        //Передаем параметр, как объект
-        public GroupHelper FillGroupForm(GroupData group)
-        {
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Clear();
-            //А во всех остальных местах, где это свойство не используется, никаких изменений вносить не надо
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            //driver.FindElement(By.Name("group_footer")).Clear();
-            //driver.FindElement(By.Name("group_footer")).SendKeys(footer);
-
             return this;
         }
 
@@ -64,16 +47,48 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Create(GroupData group)
+        public GroupHelper GoToAddNewPage()
         {
-
-            manager.Navigator.GoToHomePage();
-
-            InitNewGroupCreation();
-            FillGroupForm(group);
-            SubmitGroupCreation();
-            ReturToGroupPage();
+            driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }
+
+
+
+        public GroupHelper RemoveGroup()
+        {
+            driver.FindElement(By.XPath("(//input[@name='delete'])[1]")).Click();
+            return this;
+        }
+
+        public GroupHelper FillGroupForm(GroupData group)
+        {
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
+            //driver.FindElement(By.Name("group_footer")).Clear();
+            //driver.FindElement(By.Name("group_footer")).SendKeys(footer);
+            return this;
+        }
+
+        public GroupHelper SubmitGroupCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+
+        public GroupHelper ReturnToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("group page")).Click();
+            return this;
+        }
+
+
+
+
+
+
+
     }
 }
