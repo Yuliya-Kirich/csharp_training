@@ -20,13 +20,14 @@ namespace WebAddressbookTests
             group.Header = "ddd";
             group.Footer = "fff";
 
-            app.Navigator.GoToGroupsPage();
+            // app.Navigator.GoToGroupsPage(); создан в навигатор и перемещен в GroupHelper
+            
+            app.Groups.Create(group);
 
-            app.Groups
-                .InitNewGroupCreation()
+                /*.InitNewGroupCreation() Создан метод в GroupHelper. Тут мы ссылаемся на этот меод в котором содержатся все эти ссылки
                 .FillGroupForm(group)
                 .SubmitGroupCreation()
-                .ReturnToGroupsPage();
+                .ReturnToGroupsPage();*/
             //Место, где объект конструируется   
             //В качестве параметра передается объект group
            
@@ -40,15 +41,15 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
 
-            app.Navigator.GoToGroupsPage();
-          
+            //app.Navigator.GoToGroupsPage(); создан в навигатор и перемещен в GroupHelper
+
             //Место, где объект конструируется   
             //В качестве параметра передается объект group
-            app.Groups
-               .InitNewGroupCreation()
-               .FillGroupForm(group)
-               .SubmitGroupCreation()
-               .ReturnToGroupsPage();
+            app.Groups.Create(group);
+            /*.InitNewGroupCreation()   Создан метод в GroupHelper. Тут мы ссылаемся на этот меод в котором содержатся все эти ссылки
+            .FillGroupForm(group)
+            .SubmitGroupCreation()
+            .ReturnToGroupsPage();*/
             app.Auth.Logout();
         }
     }

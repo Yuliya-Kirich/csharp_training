@@ -19,22 +19,32 @@ namespace WebAddressbookTests
         {
         }
 
-        /*
+       
         public GroupHelper Create(GroupData group)
         {
 
-            manager.Navigator.GoToHomePage();
-
+           manager.Navigator.GoToGroupsPage(); //Перенесен из GroupCreationTest
+           
             InitNewGroupCreation();
             FillGroupForm(group);
-            RemoveGroup();
+           // RemoveGroup();
             SubmitGroupCreation();
             ReturnToGroupsPage();
-            SelectGroup(1);
+          //  SelectGroup(1);
             return this;
         }
-        */
-       
+
+
+       /* public GroupHelper Select (GroupData group) //сама напиала
+        {
+            manager.Navigator.GoToHomePage();
+            RemoveGroup();  //вытащила из метода GroupHelper Create(GroupData group)
+            SelectGroup(1);
+            return this;
+        }*/
+
+
+
         public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
@@ -67,8 +77,8 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
             driver.FindElement(By.Name("group_header")).Clear();
             driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            //driver.FindElement(By.Name("group_footer")).Clear();
-            //driver.FindElement(By.Name("group_footer")).SendKeys(footer);
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
             return this;
         }
 

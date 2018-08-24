@@ -10,17 +10,20 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    class GroupRemovalTests : TestBase
+    [TestFixture]
+    class GroupRemovalTests: TestBase
     {
         [Test]
         public void GroupRemovalTest()
         {
         app.Navigator.GoToGroupsPage();
-        app.Groups
-                .SelectGroup(1)
-                .RemoveGroup()
-                .ReturnToGroupsPage();
-       }
+        app.Groups.SelectGroup(1);
+        app.Groups.RemoveGroup();
+        app.Groups.ReturnToGroupsPage();
+                 /*.SelectGroup(1)
+             .RemoveGroup()
+              .ReturnToGroupsPage();*/
+        }
     }
 }
 
