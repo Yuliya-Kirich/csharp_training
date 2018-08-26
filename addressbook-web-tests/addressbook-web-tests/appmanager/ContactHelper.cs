@@ -12,10 +12,43 @@ namespace WebAddressbookTests
 {
     public class ContactHelper: HelperBase
     {
-        
+       
+
         public ContactHelper(ApplicationManager manager) 
             :base(manager)
         {
+        }
+
+        public ContactHelper Modify(int v, NewContactData newData)
+        {
+            manager.Navigator.GoToHomePage();
+            //manager.Navigator.GoToHome();
+            SelectContact(v);
+            InitContactModification();
+            FilAddNewForm(newData);
+            SubmitGroupModification();
+            ReturToHomePage();
+
+            return this;
+        }
+
+        public ContactHelper Create(NewContactData contact)
+        {
+
+            manager.Navigator.GoToAddNewPage(); //Перенесен из NewContactTest
+            FilAddNewForm(contact);
+            EnterNewContactCreation();
+            ReturToHomePage();
+            return this;
+            
+        }
+
+        public ContactHelper RemoveNewContact(int v)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(v);
+            RemoveContact();
+            return this;
         }
 
         public ContactHelper FilAddNewForm(NewContactData contact)
@@ -48,6 +81,25 @@ namespace WebAddressbookTests
             return this;
         }
 
-        
+        public ContactHelper ReturToHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+            return this;
+        }
+
+
+        public ContactHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.XPath("(//input[@value='Update'])")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModification()
+        {
+            //driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[2]")).Click();
+
+            return this;
+        }
     }
 }

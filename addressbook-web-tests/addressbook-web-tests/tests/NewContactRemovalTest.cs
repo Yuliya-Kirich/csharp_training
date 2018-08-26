@@ -10,6 +10,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
+    [TestFixture]
     class NewContactRemovalTests : TestBase
     {
        
@@ -18,10 +19,12 @@ namespace WebAddressbookTests
         [Test]
         public void NewContactRemovalTest()
         {
-            app.Navigator.GoToHomePage();
+            app.Contact.RemoveNewContact(1);
+
+            /*app.Navigator.GoToHomePage(); перенесено в ContactHelper
             app.Contact
                 .SelectContact(1)
-                .RemoveContact();
+                .RemoveContact();*/
         }
     }
 }

@@ -6,25 +6,30 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
+    [TestFixture]
+
     class NewContactTests : TestBase
     {
 
         [Test]
         public void NewContactTest()
         {
-            
 
-            app.Navigator.GoToAddNewPage();
-           NewContactData contact = new NewContactData("");
+            NewContactData contact = new NewContactData("");
             contact.Firstname = "Елена";
             contact.Lastname = "Иванова";
 
-            app.Contact                 
-                .FilAddNewForm(contact)
-                .EnterNewContactCreation();
+            app.Contact.Create(contact);
+            app.Auth.Logout();
 
-        app.Navigator.ReturToHomePage();
-        app.Auth.Logout();
+            //app.Navigator.GoToAddNewPage(); перенесен в ContactHelper
+
+            /*    app.Contact                  перенесен в ContactHelper
+                    .FilAddNewForm(contact)
+                    .EnterNewContactCreation();*/
+
+            // app.Navigator.GoToHome(); перенесен в ContactHelper и заменен на ReturToHomePage();
+
 
         }
     }

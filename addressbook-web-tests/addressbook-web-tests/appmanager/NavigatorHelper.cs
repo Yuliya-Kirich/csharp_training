@@ -38,10 +38,11 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
-        public void ReturToHomePage()
+        public void GoToHome()
         {
             driver.FindElement(By.LinkText("home page")).Click();
         }
+        
 
 
     }
