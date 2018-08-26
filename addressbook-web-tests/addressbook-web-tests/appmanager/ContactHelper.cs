@@ -51,14 +51,26 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper FilAddNewForm(NewContactData contact)
+
+        
+            public ContactHelper FilAddNewForm(NewContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
+            Type(By.Name("firstname"), contact.Firstname);
+            Type(By.Name("lastname"), contact.Lastname);
+           
             return this;
         }
+
+        /* Модифицировали
+                public ContactHelper FilAddNewForm(NewContactData contact)
+                {
+                    driver.FindElement(By.Name("firstname")).Clear();
+                    driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
+                    driver.FindElement(By.Name("lastname")).Clear();
+                    driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
+                    return this;
+                }
+        */
 
         public ContactHelper EnterNewContactCreation()
         {

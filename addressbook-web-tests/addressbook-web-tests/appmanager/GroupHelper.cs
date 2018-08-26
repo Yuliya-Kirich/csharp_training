@@ -97,14 +97,47 @@ namespace WebAddressbookTests
 
         public GroupHelper FillGroupForm(GroupData group)
         {
-            driver.FindElement(By.Name("group_name")).Clear();
+            /*1) By locator = By.Name("group_name"); //Временно вынесли в переменные  и создали из двух строчек новый метод
+            string text = group.Name;
+            Type(locator, text);*/
+
+            
+            Type(By.Name("group_name"), group.Name); // 2) убрать локальные переменные 
+            Type(By.Name("group_header"), group.Header);// 3) проделать то же самое с остальными
+            Type(By.Name("group_footer"), group.Footer);
+            
+
+
+            /*driver.FindElement(By.Name("group_name")).Clear();   // модифицировать, убрать лишние строки (в пунктах 1-3 описание)
             driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
             driver.FindElement(By.Name("group_header")).Clear();
             driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
             driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);*/
             return this;
         }
+
+/*
+        //реализуем нужную нам функциональность  
+        public void Type(By locator, string text)                 //Переносим в HelperBase
+        {
+            if(text != null)
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(text);
+            }
+
+
+        }
+*/
+
+
+        /*
+        private void Type(By locator, string text)    // перенесено в условие (если, то)
+        {
+            driver.FindElement(locator).Clear();
+            driver.FindElement(locator).SendKeys(text);
+        }*/
 
         public GroupHelper SubmitGroupCreation()
         {
