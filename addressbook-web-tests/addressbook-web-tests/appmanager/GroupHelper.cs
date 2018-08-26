@@ -35,13 +35,23 @@ namespace WebAddressbookTests
         }
 
 
-       /* public GroupHelper Select (GroupData group) //сама напиала
+        public GroupHelper Remove(int v)
         {
-            manager.Navigator.GoToHomePage();
-            RemoveGroup();  //вытащила из метода GroupHelper Create(GroupData group)
+            manager.Navigator.GoToGroupsPage();
             SelectGroup(1);
+            RemoveGroup();
+            ReturnToGroupsPage();
             return this;
-        }*/
+        }
+
+
+        /* public GroupHelper Select (GroupData group) //сама напиала
+         {
+             manager.Navigator.GoToHomePage();
+             RemoveGroup();  //вытащила из метода GroupHelper Create(GroupData group)
+             SelectGroup(1);
+             return this;
+         }*/
 
 
 

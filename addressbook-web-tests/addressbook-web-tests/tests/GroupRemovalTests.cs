@@ -16,10 +16,13 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-        app.Navigator.GoToGroupsPage();
+            app.Groups.Remove(1);
+
+
+       /* app.Navigator.GoToGroupsPage();  перенесен в GroupHelper в метод Remove
         app.Groups.SelectGroup(1);
         app.Groups.RemoveGroup();
-        app.Groups.ReturnToGroupsPage();
+        app.Groups.ReturnToGroupsPage();*/
                  /*.SelectGroup(1)
              .RemoveGroup()
               .ReturnToGroupsPage();*/
