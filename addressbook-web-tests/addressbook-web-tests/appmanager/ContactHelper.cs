@@ -23,8 +23,8 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             //manager.Navigator.GoToHome();
-            SelectContact(v);
-            InitContactModification();
+            // SelectContact();  //не нужен. зато добавлен индекс для  InitContactModification
+            InitContactModification(1);
             FilAddNewForm(newData);
             SubmitGroupModification();
             ReturToHomePage();
@@ -43,10 +43,10 @@ namespace WebAddressbookTests
             
         }
 
-        public ContactHelper RemoveNewContact(int v)
+        public ContactHelper RemoveNewContact()
         {
             manager.Navigator.GoToHomePage();
-            SelectContact(v);
+            SelectContact();
             RemoveContact();
             return this;
         }
@@ -78,7 +78,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper SelectContact(int index)
+        public ContactHelper SelectContact()
         {
             //driver.FindElement(By.Id("6")).Click();
             driver.FindElement(By.XPath("(//input[@name='selected[]'])")).Click();
@@ -106,10 +106,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper InitContactModification()
+        public ContactHelper InitContactModification(int index)
         {
             //driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[2]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
 
             return this;
         }
