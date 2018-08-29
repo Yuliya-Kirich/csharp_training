@@ -16,18 +16,23 @@ namespace WebAddressbookTests
         public void SetupTest()
         {
 
-            app = new ApplicationManager();
-            //передается не два значения, отдельно, а один объект
+            // app = new ApplicationManager(); //заменяем
+
+            app = TestSuiteFixture.app;
+
+           /* Перемещается в TestSuiteFixture
+            * 
+            * //передается не два значения, отдельно, а один объект
             app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Auth.Login(new AccountData("admin", "secret"));*/
         }
 
-        [TearDown]
+       /* [TearDown] // метод можно удалить, т.к. осуществлен перенос
         public void TeardownTest()
         {
-            app.Stop();
+           // app.Stop(); Перенесено в TestSuiteFixture
         }
-
+        */
        
     }
 }
