@@ -7,6 +7,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Threading;
 
 
 namespace WebAddressbookTests
@@ -22,8 +23,11 @@ namespace WebAddressbookTests
         protected NavigatorHelper navigator;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
+        //private static ApplicationManager instance; //единственный экземпляр ApplicationManager
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>(); //установление соответствия
 
-        public ApplicationManager()
+        //сделаем приватный конструктор, чтобы за его пределами класса ApplicationManager, никто не мог сконструировать другие объекты
+        private ApplicationManager()
         {
             FirefoxOptions options = new FirefoxOptions();
             options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
@@ -37,7 +41,42 @@ namespace WebAddressbookTests
             contactHelper = new ContactHelper(this);
         }
 
-               
+        //диструктор
+        ~ApplicationManager()
+        {
+            try
+            {
+                driver.Quit();
+            }
+            catch (Exception)
+            {
+                // Ignore errors if unable to close the browser
+            }
+        }
+
+        // GetInstance анализирует и проверяет, что для текущего потока есть ApplicationManager. И при его отсутствии создавать ноый объект.
+        public static ApplicationManager GetInstance()  
+        {
+
+            /*
+            if (instance == null)
+            {
+                instance = new ApplicationManager();
+            }
+            // метод должен вернуть какой-то экземпляр класса ApplicationManager
+            return instance;
+            */
+
+            if (!app.IsValueCreated)
+            {
+                app.Value = new ApplicationManager();
+            }
+            // метод должен вернуть какой-то экземпляр класса ApplicationManager
+            return app.Value;
+
+        }
+
+
 
         public IWebDriver Driver
         {
@@ -47,7 +86,9 @@ namespace WebAddressbookTests
             }
         }
 
-        public void Stop()
+        /*перенесено в метод ~ApplicationManager()
+         * 
+         * public void Stop()
         {
             try
             {
@@ -59,6 +100,7 @@ namespace WebAddressbookTests
             }
 
         }
+*/
 
         public LoginHelper Auth
         {

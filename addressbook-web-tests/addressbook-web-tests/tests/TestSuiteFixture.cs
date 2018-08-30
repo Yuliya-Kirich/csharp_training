@@ -11,21 +11,25 @@ namespace WebAddressbookTests
 
     public class TestSuiteFixture
     {
-        public static ApplicationManager app;
+       // public static ApplicationManager app;
 
         [SetUp]
 
         public void InitApplicationManager()
         {
-            app = new ApplicationManager();
+            ApplicationManager app = ApplicationManager.GetInstance();
             app.Navigator.GoToHomePage();
             app.Auth.Login(new AccountData("admin", "secret"));
         }
 
-        [TearDown]
-        public void StopApplicationManager()
-        {
-            app.Stop();
-        }
+        /* создан метод в ApplicationManager - ~ApplicationManager(), который не предпологает дополнительных методов для его вызова
+         * 
+         * [TearDown]
+         public void StopApplicationManager()
+         {
+             //app.Stop();
+             ApplicationManager.GetInstance().Stop();
+         }
+         */
     }
 }

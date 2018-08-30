@@ -18,13 +18,15 @@ namespace WebAddressbookTests
 
             // app = new ApplicationManager(); //заменяем
 
-            app = TestSuiteFixture.app;
+            //app = TestSuiteFixture.app;
 
-           /* Перемещается в TestSuiteFixture
-            * 
-            * //передается не два значения, отдельно, а один объект
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));*/
+            app = ApplicationManager.GetInstance();
+
+            /* Перемещается в TestSuiteFixture
+             * 
+             * //передается не два значения, отдельно, а один объект
+             app.Navigator.GoToHomePage();
+             app.Auth.Login(new AccountData("admin", "secret"));*/
         }
 
        /* [TearDown] // метод можно удалить, т.к. осуществлен перенос
