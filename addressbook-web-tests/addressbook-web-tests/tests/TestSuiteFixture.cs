@@ -7,6 +7,14 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
+    /*
+
+    Удалена Глобальная фикстура, т.к. не нужна
+
+
+
+
+
     [SetUpFixture]
 
     public class TestSuiteFixture
@@ -18,9 +26,10 @@ namespace WebAddressbookTests
         public void InitApplicationManager()
         {
             ApplicationManager app = ApplicationManager.GetInstance();
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-        }
+            /*  app.Navigator.GoToHomePage();                создавался глобальный код инициализации. Сейчас, переносится в ApplicationManager*/
+    // app.Auth.Login(new AccountData("admin", "secret"));  Перенесен в TestBase
+    //*/ 
+}
 
         /* создан метод в ApplicationManager - ~ApplicationManager(), который не предпологает дополнительных методов для его вызова
          * 
@@ -31,5 +40,6 @@ namespace WebAddressbookTests
              ApplicationManager.GetInstance().Stop();
          }
          */
-    }
-}
+  //  }
+
+//}

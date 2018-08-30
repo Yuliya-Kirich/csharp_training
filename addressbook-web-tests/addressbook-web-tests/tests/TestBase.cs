@@ -13,14 +13,15 @@ namespace WebAddressbookTests
         protected ApplicationManager app;
 
         [SetUp]
-        public void SetupTest()
+        public void /*SetupTest()*/ SetupAplicationManager()
         {
 
             // app = new ApplicationManager(); //заменяем
 
             //app = TestSuiteFixture.app;
 
-            app = ApplicationManager.GetInstance();
+            app = ApplicationManager.GetInstance(); //1 уровень - инициализируется ApplicationManager
+           // app.Auth.Login(new AccountData("admin", "secret"));  перенесен в класс AuthTestBase
 
             /* Перемещается в TestSuiteFixture
              * 

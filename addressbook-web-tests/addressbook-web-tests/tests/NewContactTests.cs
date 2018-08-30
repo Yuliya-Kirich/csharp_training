@@ -8,7 +8,7 @@ namespace WebAddressbookTests
 {
     [TestFixture]
 
-    class NewContactTests : TestBase
+    class NewContactTests : /*TestBase*/  AuthTestBase
     {
 
         [Test]

@@ -69,7 +69,13 @@ namespace WebAddressbookTests
 
             if (!app.IsValueCreated)
             {
-                app.Value = new ApplicationManager();
+                //app.Value = new ApplicationManager();
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.GoToHomePage();
+                app.Value = newInstance;
+              
+                // app.Navigator.GoToHomePage();
+                //  app.Auth.Login(new AccountData("admin", "secret"));
             }
             // метод должен вернуть какой-то экземпляр класса ApplicationManager
             return app.Value;
