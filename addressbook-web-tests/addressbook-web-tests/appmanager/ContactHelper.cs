@@ -24,6 +24,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             //manager.Navigator.GoToHome();
             // SelectContact();  //не нужен. зато добавлен индекс для  InitContactModification
+            CheckTheExistenceOfaContact();
             InitContactModification(1);
             FilAddNewForm(newData);
             SubmitGroupModification();
@@ -46,6 +47,7 @@ namespace WebAddressbookTests
         public ContactHelper RemoveNewContact()
         {
             manager.Navigator.GoToHomePage();
+            CheckTheExistenceOfaContact();
             SelectContact();
             RemoveContact();
             return this;
@@ -113,5 +115,23 @@ namespace WebAddressbookTests
 
             return this;
         }
+
+
+        public ContactHelper CheckTheExistenceOfaContact()
+        {
+
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])")))
+            {
+                return this;
+            }
+
+            NewContactData contact = new NewContactData("");
+            contact.Firstname = "Test Name";
+            contact.Lastname = "Test Lastname";
+            Create(contact);
+
+            return this;
+        }
+
     }
 }

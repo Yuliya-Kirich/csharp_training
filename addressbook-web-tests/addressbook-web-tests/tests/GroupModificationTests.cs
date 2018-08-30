@@ -18,6 +18,9 @@ namespace WebAddressbookTests
             newData.Header = null; //"ttt";
             newData.Footer = null; //"qqq";
 
+
+            
+
             app.Groups.Modify(1, newData);
         }
     }
