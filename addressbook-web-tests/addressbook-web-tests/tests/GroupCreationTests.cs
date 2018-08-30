@@ -24,13 +24,13 @@ namespace WebAddressbookTests
             
             app.Groups.Create(group);
 
-                /*.InitNewGroupCreation() Создан метод в GroupHelper. Тут мы ссылаемся на этот меод в котором содержатся все эти ссылки
-                .FillGroupForm(group)
-                .SubmitGroupCreation()
-                .ReturnToGroupsPage();*/
+            /*.InitNewGroupCreation() Создан метод в GroupHelper. Тут мы ссылаемся на этот меод в котором содержатся все эти ссылки
+            .FillGroupForm(group)
+            .SubmitGroupCreation()
+            .ReturnToGroupsPage();*/
             //Место, где объект конструируется   
             //В качестве параметра передается объект group
-           
+           // app.Auth.Logout();
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace WebAddressbookTests
             .FillGroupForm(group)
             .SubmitGroupCreation()
             .ReturnToGroupsPage();*/
-            app.Auth.Logout();
+            //app.Auth.Logout(); // выполнение следом за этим тестом
         }
     }
 
