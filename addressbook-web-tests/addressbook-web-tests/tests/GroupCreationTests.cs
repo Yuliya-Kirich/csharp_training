@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using WebAddressbookTests;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -21,7 +22,8 @@ namespace WebAddressbookTests
             group.Footer = "fff";
 
             // app.Navigator.GoToGroupsPage(); создан в навигатор и перемещен в GroupHelper
-            
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
 
             /*.InitNewGroupCreation() Создан метод в GroupHelper. Тут мы ссылаемся на этот меод в котором содержатся все эти ссылки
@@ -30,7 +32,12 @@ namespace WebAddressbookTests
             .ReturnToGroupsPage();*/
             //Место, где объект конструируется   
             //В качестве параметра передается объект group
-           // app.Auth.Logout();
+            // app.Auth.Logout();
+
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            //groups.Count;
         }
 
         [Test]
@@ -43,6 +50,8 @@ namespace WebAddressbookTests
 
             //app.Navigator.GoToGroupsPage(); создан в навигатор и перемещен в GroupHelper
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             //Место, где объект конструируется   
             //В качестве параметра передается объект group
             app.Groups.Create(group);
@@ -51,6 +60,9 @@ namespace WebAddressbookTests
             .SubmitGroupCreation()
             .ReturnToGroupsPage();*/
             //app.Auth.Logout(); // выполнение следом за этим тестом
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
     }
 
