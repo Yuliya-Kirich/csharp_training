@@ -41,8 +41,8 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int v, GroupData newData)
         {
            
-            manager.Navigator.GoToGroupsPage();
-            CheckTheExistenceOfaGroup();
+           // manager.Navigator.GoToGroupsPage();
+           // CheckTheExistenceOfaGroup();
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -56,8 +56,8 @@ namespace WebAddressbookTests
 
         public GroupHelper Remove(int v)
         {
-            manager.Navigator.GoToGroupsPage();
-            CheckTheExistenceOfaGroup();
+            //manager.Navigator.GoToGroupsPage();
+            //CheckTheExistenceOfaGroup();
             SelectGroup(v);
             RemoveGroup();
             ReturnToGroupsPage();
@@ -170,6 +170,7 @@ namespace WebAddressbookTests
             return this;
         }
 
+        /*
         public GroupHelper CheckTheExistenceOfaGroup()
         {
             
@@ -186,7 +187,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-
+    */
 
     }
 }

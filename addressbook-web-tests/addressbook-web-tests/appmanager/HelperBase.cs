@@ -47,5 +47,40 @@ namespace WebAddressbookTests
                 return false;
             }
         }
+
+
+
+        public void CheckTheExistenceOfaGroup()
+        {
+
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])")))
+            {
+                return;
+            }
+
+            GroupData group = new GroupData("test1");
+            group.Header = "test1.1";
+            group.Footer = "test1.1.1";
+            manager.Groups.Create(group);
+
+            return;
+        }
+
+        public void CheckTheExistenceOfaContact()
+        {
+
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])")))
+            {
+                return;
+            }
+
+            NewContactData contact = new NewContactData("");
+            contact.Firstname = "Test Name";
+            contact.Lastname = "Test Lastname";
+            manager.Contact.Create(contact);
+
+            return;
+        }
     }   
+
 }

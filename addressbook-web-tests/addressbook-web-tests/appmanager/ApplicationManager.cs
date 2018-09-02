@@ -23,6 +23,7 @@ namespace WebAddressbookTests
         protected NavigatorHelper navigator;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
+        protected HelperBase helper;
         //private static ApplicationManager instance; //единственный экземпляр ApplicationManager
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>(); //установление соответствия
 
@@ -39,6 +40,7 @@ namespace WebAddressbookTests
             navigator = new NavigatorHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
+            helper = new HelperBase(this);
         }
 
         //диструктор
@@ -140,6 +142,12 @@ namespace WebAddressbookTests
             }
         }
 
-        
+        public HelperBase Helper
+        {
+            get
+            {
+                return helper;
+            }
+        }
     }
 }

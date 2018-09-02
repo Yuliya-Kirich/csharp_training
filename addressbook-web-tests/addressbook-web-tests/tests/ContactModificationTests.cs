@@ -16,6 +16,10 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
+            app.Navigator.GoToHomePage();
+            //manager.Navigator.GoToHome();
+            // SelectContact();  //не нужен. зато добавлен индекс для  InitContactModification
+            app.Helper.CheckTheExistenceOfaContact();
 
 
             NewContactData newContData = new NewContactData("") ;

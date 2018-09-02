@@ -19,6 +19,10 @@ namespace WebAddressbookTests
         [Test]
         public void NewContactRemovalTest()
         {
+
+            app.Navigator.GoToHomePage();
+            app.Helper.CheckTheExistenceOfaContact();
+
             app.Contact.RemoveNewContact();
 
             /*app.Navigator.GoToHomePage(); перенесено в ContactHelper

@@ -16,6 +16,11 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
+
+            app.Navigator.GoToGroupsPage();
+            app.Groups.CheckTheExistenceOfaGroup();
+
+
             app.Groups.Remove(1);
 
 

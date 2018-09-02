@@ -21,10 +21,10 @@ namespace WebAddressbookTests
 
         public ContactHelper Modify(int v, NewContactData newData)
         {
-            manager.Navigator.GoToHomePage();
+          /*  manager.Navigator.GoToHomePage();
             //manager.Navigator.GoToHome();
             // SelectContact();  //не нужен. зато добавлен индекс для  InitContactModification
-            CheckTheExistenceOfaContact();
+            CheckTheExistenceOfaContact();*/
             InitContactModification(1);
             FilAddNewForm(newData);
             SubmitGroupModification();
@@ -46,8 +46,8 @@ namespace WebAddressbookTests
 
         public ContactHelper RemoveNewContact()
         {
-            manager.Navigator.GoToHomePage();
-            CheckTheExistenceOfaContact();
+           // manager.Navigator.GoToHomePage();
+           // CheckTheExistenceOfaContact();
             SelectContact();
             RemoveContact();
             return this;
@@ -116,7 +116,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-
+/*
         public ContactHelper CheckTheExistenceOfaContact()
         {
 
@@ -132,6 +132,6 @@ namespace WebAddressbookTests
 
             return this;
         }
-
+        */
     }
 }
