@@ -111,7 +111,8 @@ namespace WebAddressbookTests
         public ContactHelper InitContactModification(int index)
         {
             //driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            // driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index) + "]")).Click(); переписано по С#
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index + 1) + "]")).Click();
 
             return this;
         }

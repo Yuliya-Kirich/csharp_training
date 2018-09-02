@@ -23,7 +23,7 @@ namespace WebAddressbookTests
 
             // app.Navigator.GoToGroupsPage(); создан в навигатор и перемещен в GroupHelper
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-
+            
             app.Groups.Create(group);
 
             /*.InitNewGroupCreation() Создан метод в GroupHelper. Тут мы ссылаемся на этот меод в котором содержатся все эти ссылки
@@ -36,7 +36,12 @@ namespace WebAddressbookTests
 
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+            // Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
             //groups.Count;
         }
 
@@ -62,6 +67,9 @@ namespace WebAddressbookTests
             //app.Auth.Logout(); // выполнение следом за этим тестом
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
             Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
     }

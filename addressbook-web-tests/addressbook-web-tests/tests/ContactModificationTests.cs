@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
+
+
 namespace WebAddressbookTests
 {
     [TestFixture]
@@ -27,8 +29,9 @@ namespace WebAddressbookTests
             newContData.Lastname = "Заморочкина";
 
 
-            app.Contact.Modify(1, newContData);
+            app.Contact.Modify(0, newContData);
 
+           
         }
 
     }
