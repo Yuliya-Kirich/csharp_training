@@ -33,6 +33,20 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public List<NewContactData> GetContactList()
+        {
+           List<NewContactData> contacts = new List<NewContactData>();
+           manager.Navigator.Gotohome();
+           ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr. "));
+            //"tbody > tr.entry"
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new NewContactData(element.Text));
+            }
+
+           return contacts;
+        }
+
         public ContactHelper Create(NewContactData contact)
         {
 
