@@ -62,7 +62,7 @@ namespace WebAddressbookTests
         {
            // manager.Navigator.GoToHomePage();
            // CheckTheExistenceOfaContact();
-            SelectContact();
+            SelectContact(0);
             RemoveContact();
             return this;
         }
@@ -94,10 +94,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper SelectContact()
+        public ContactHelper SelectContact(int index)
         {
             //driver.FindElement(By.Id("6")).Click();
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
