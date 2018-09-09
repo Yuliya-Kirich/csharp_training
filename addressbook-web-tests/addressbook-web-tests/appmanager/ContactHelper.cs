@@ -37,7 +37,7 @@ namespace WebAddressbookTests
         {
            List<NewContactData> contacts = new List<NewContactData>();
            manager.Navigator.Gotohome();
-           ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr. "));
+           ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("input[name='selected[]']"));
             //"tbody > tr.entry"
             foreach (IWebElement element in elements)
             {

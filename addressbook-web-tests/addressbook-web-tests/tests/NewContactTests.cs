@@ -27,9 +27,9 @@ namespace WebAddressbookTests
 
             List<NewContactData> newContact = app.Contact.GetContactList();
 
-            oldContact.Add(contact);
+          /*  oldContact.Add(contact);
             oldContact.Sort();
-            newContact.Sort();
+            newContact.Sort();*/
             Assert.AreEqual(oldContact.Count + 1, newContact.Count);
 
             app.Auth.Logout();
