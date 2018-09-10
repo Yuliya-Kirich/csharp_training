@@ -16,23 +16,27 @@ namespace WebAddressbookTests
         public void NewContactTest()
         {
 
-            List<NewContactData> oldContact = app.Contact.GetContactList();
+            
 
             NewContactData contact = new NewContactData("");
             contact.Firstname = "Елена";
             contact.Lastname = "Иванова";
 
 
+            List<NewContactData> oldContact = app.Contact.GetContactList();
+
+
             app.Contact.Create(contact);
 
             List<NewContactData> newContact = app.Contact.GetContactList();
 
-          /*  oldContact.Add(contact);
-            oldContact.Sort();
-            newContact.Sort();*/
-            Assert.AreEqual(oldContact.Count + 1, newContact.Count);
+              oldContact.Add(contact);
+              oldContact.Sort();
+              newContact.Sort();
+         
+            Assert.AreEqual(oldContact, newContact);
 
-            app.Auth.Logout();
+          //  app.Auth.Logout();
 
             //app.Navigator.GoToAddNewPage(); перенесен в ContactHelper
 

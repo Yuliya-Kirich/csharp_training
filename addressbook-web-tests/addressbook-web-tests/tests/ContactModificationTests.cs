@@ -28,10 +28,19 @@ namespace WebAddressbookTests
             newContData.Firstname = "Анна";
             newContData.Lastname = "Заморочкина";
 
+            List<NewContactData> oldContact = app.Contact.GetContactList();
 
             app.Contact.Modify(0, newContData);
 
-           
+            List<NewContactData> newContact = app.Contact.GetContactList();
+
+            oldContact[0].Lastname = newContData.Lastname;
+            oldContact[0].Firstname = newContData.Firstname;
+            oldContact.Sort();
+            newContact.Sort();
+
+            Assert.AreEqual(oldContact, newContact);
+
         }
 
     }

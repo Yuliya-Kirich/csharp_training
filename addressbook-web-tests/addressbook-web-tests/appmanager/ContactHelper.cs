@@ -25,7 +25,7 @@ namespace WebAddressbookTests
             //manager.Navigator.GoToHome();
             // SelectContact();  //не нужен. зато добавлен индекс для  InitContactModification
             CheckTheExistenceOfaContact();*/
-            InitContactModification(1);
+            InitContactModification(0);
             FilAddNewForm(newData);
             SubmitGroupModification();
             ReturToHomePage();
@@ -35,16 +35,39 @@ namespace WebAddressbookTests
 
         public List<NewContactData> GetContactList()
         {
-           List<NewContactData> contacts = new List<NewContactData>();
-           manager.Navigator.Gotohome();
-           ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("input[name='selected[]']"));
+
+           List<NewContactData> contact = new List<NewContactData>(); // contacts
+          
+            manager.Navigator.Gotohome();
+            /*
+            //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("input[name='selected[]']"));
+            //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td.center"));
+            // ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div#container div#content form table#maintable.sortcompletecallback-applyZebra"));
+           ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div#container div#content form table#maintable.sortcompletecallback-applyZebra tbody tr td.center input"));
+           // ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div#container div#content form table#maintable.sortcompletecallback-applyZebra tbody tr"));
+            //  ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr.entry"));
             //"tbody > tr.entry"
             foreach (IWebElement element in elements)
             {
-                contacts.Add(new NewContactData(element.Text));
+                contact.Add(new NewContactData(element.Text));  // contacts
+            }*/
+
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr"));
+            int counter = 0;
+            foreach (IWebElement element in elements)
+            {
+                if (counter > 0)
+                {
+                    string secondbox = element.FindElement(By.XPath("td[3]")).Text;
+                    string firstbox = element.FindElement(By.XPath("td[2]")).Text;
+                   
+                   
+                    contact.Add(new NewContactData(secondbox, firstbox));
+                }
+                counter++;
             }
 
-           return contacts;
+            return contact;  // contacts
         }
 
         public ContactHelper Create(NewContactData contact)
