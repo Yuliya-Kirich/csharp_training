@@ -50,9 +50,41 @@ namespace WebAddressbookTests
                 foreach (IWebElement element in elements)
                 {
                     //в локальную переменную сохраняем ссылку на объект. Затем присваиваем свойства. Заием полученную группу с таким идентификатором добавлять в список
-                    groupCache.Add(new GroupData(element.Text){
-                       Id = element.FindElement(By.TagName("input")).GetAttribute("value")
-                     });
+
+                    //Если на странице 100 элементов, то к браузеру нужно 300 раз обратиться. Избавимся от получения текста элемента
+
+                    groupCache.Add(new GroupData(null)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                    /* groupCache.Add(new GroupData(element.Text){
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                      });
+                      */
+                }
+
+               // string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+
+                string allGroupNames = driver.FindElement(By.CssSelector("div#container div#content form")).Text;
+
+                
+                string[] parts = allGroupNames.Split('\n'); //режет на много кусочков 
+                int shift = groupCache.Count - parts.Length;// насколько в кеше правильных групп больше, чем тех кусочков, чтол мы смогли получить
+                for (int i = 0; i < groupCache.Count; i++)
+                {
+                    if (i < shift) //если индекс i меньше чем сдвиг, то прописываем пустое имя, иначе прописываем имя что нужно но со сдвигом
+                    {
+                        groupCache[i].Name = "";
+                    }
+                    else
+                    {
+
+
+                        groupCache[i].Name = parts[i-shift].Trim();//если сдвиг равен 5, то группа с индексом 5 будет соответствовать кусочек с индексом 0
+                        //а все предыдущие группы получат пустые имена
+                        //прописываем имена всем группам/ Trim удаляет лишние пробельные символы
+                        //группы с пустыми именами тоже удалятся
+                    }
                 }
             }
                     
