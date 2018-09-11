@@ -26,6 +26,7 @@ namespace WebAddressbookTests
             
             app.Groups.Create(group);
 
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
             /*.InitNewGroupCreation() Создан метод в GroupHelper. Тут мы ссылаемся на этот меод в котором содержатся все эти ссылки
             .FillGroupForm(group)
             .SubmitGroupCreation()
@@ -60,6 +61,9 @@ namespace WebAddressbookTests
             //Место, где объект конструируется   
             //В качестве параметра передается объект group
             app.Groups.Create(group);
+            //int count = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
+
             /*.InitNewGroupCreation()   Создан метод в GroupHelper. Тут мы ссылаемся на этот меод в котором содержатся все эти ссылки
             .FillGroupForm(group)
             .SubmitGroupCreation()

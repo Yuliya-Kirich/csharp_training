@@ -33,6 +33,7 @@ namespace WebAddressbookTests
             return this;
         }
 
+        
         private List<NewContactData> contactCache = null;
 
         public List<NewContactData> GetContactList()
@@ -60,6 +61,7 @@ namespace WebAddressbookTests
             return new List<NewContactData>(contactCache);  
         }
 
+
         /* 
          * public List<NewContactData> GetContactList()
          {
@@ -86,6 +88,13 @@ namespace WebAddressbookTests
              return contact;  // contacts
          }
      */
+     /*
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.CssSelector("tr #entry")).Count;
+            //div#container div#content form table#maintable.sortcompletecallback-applyZebra tbody tr
+        }
+        */
 
         public ContactHelper Create(NewContactData contact)
         {

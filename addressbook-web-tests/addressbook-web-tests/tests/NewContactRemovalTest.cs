@@ -28,6 +28,8 @@ namespace WebAddressbookTests
 
             app.Contact.RemoveNewContact();
 
+           // Assert.AreEqual(oldContact.Count - 1, app.Contact.GetContactCount());
+
 
             List<NewContactData> newContact = app.Contact.GetContactList();
 

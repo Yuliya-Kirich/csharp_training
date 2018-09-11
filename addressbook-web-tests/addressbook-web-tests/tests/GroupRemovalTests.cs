@@ -25,6 +25,8 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Remove(0);
 
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount()); //размер уменьшился на один, по сравнению со старым
+
             /* app.Navigator.GoToGroupsPage();  перенесен в GroupHelper в метод Remove
              app.Groups.SelectGroup(1);
              app.Groups.RemoveGroup();
