@@ -36,8 +36,16 @@ namespace WebAddressbookTests
          .ReturnToGroupsPage();*/
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0);
-            Assert.AreEqual(oldGroups, newGroups);
+            Assert.AreEqual(oldGroups, newGroups); // по прежнему сравниваются имена
+
+
+            //для каждой группы в новом списке должны убедиться, что идентификатор элемента не равен удаленному элементу
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
         }
     }
 }

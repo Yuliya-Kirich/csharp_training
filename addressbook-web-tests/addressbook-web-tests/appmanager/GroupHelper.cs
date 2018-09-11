@@ -46,16 +46,23 @@ namespace WebAddressbookTests
                 groupCache = new List<GroupData>();
                 manager.Navigator.GoToGroupsPage();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                //внутри span находим input, и внутри одного элемента ищем другой, смотрим атрибут value
                 foreach (IWebElement element in elements)
                 {
-                    // GroupData group = new GroupData (element.Text));
-                    groupCache.Add(new GroupData(element.Text));
+                    //в локальную переменную сохраняем ссылку на объект. Затем присваиваем свойства. Заием полученную группу с таким идентификатором добавлять в список
+                    groupCache.Add(new GroupData(element.Text){
+                       Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                     });
                 }
             }
-
+                    
 
             return new List<GroupData>(groupCache);
+
         }
+
+
+
 
         public int GetGroupCount()
         {
