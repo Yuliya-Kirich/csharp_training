@@ -19,39 +19,63 @@ namespace WebAddressbookTests
         {
         }
 
-        
+
 
         public GroupHelper Create(GroupData group)
         {
 
-           manager.Navigator.GoToGroupsPage(); //Перенесен из GroupCreationTest
-           
+            manager.Navigator.GoToGroupsPage(); //Перенесен из GroupCreationTest
+
             InitNewGroupCreation();
             FillGroupForm(group);
-           // RemoveGroup();
+            // RemoveGroup();
             SubmitGroupCreation();
             ReturnToGroupsPage();
-          //  SelectGroup(1);
+            //  SelectGroup(1);
             return this;
         }
+        
 
 
+        private List<GroupData> groupCache = null;
 
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-            manager.Navigator.GoToGroupsPage();
-            ICollection<IWebElement>elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
+            if (groupCache == null)
             {
-              // GroupData group = new GroupData (element.Text));
-               groups.Add(new GroupData(element.Text));
+                groupCache = new List<GroupData>();
+                manager.Navigator.GoToGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    // GroupData group = new GroupData (element.Text));
+                    groupCache.Add(new GroupData(element.Text));
+                }
             }
 
-            return groups;
+
+            return new List<GroupData>(groupCache);
         }
 
+        /*
+        public List<GroupData> GetGroupList()
+        {
+            if (groupCache == null)
+            {
+                List<GroupData> groups = new List<GroupData>();
+                manager.Navigator.GoToGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    // GroupData group = new GroupData (element.Text));
+                    groups.Add(new GroupData(element.Text));
+                }
+            }
 
+            return new List<GroupData>(groupCache);
+        }
+
+*/
 
         public GroupHelper Modify(int v, GroupData newData)
         {
@@ -115,6 +139,7 @@ namespace WebAddressbookTests
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.XPath("(//input[@name='delete'])[1]")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -165,6 +190,7 @@ namespace WebAddressbookTests
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -177,6 +203,7 @@ namespace WebAddressbookTests
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCache = null;
             return this;
         }
 
