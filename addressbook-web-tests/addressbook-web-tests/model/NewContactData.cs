@@ -9,19 +9,22 @@ namespace WebAddressbookTests
     public class NewContactData : IEquatable<NewContactData>, IComparable<NewContactData>
     {
 
-        private string firstname = "";
-        private string lastname = "";
+      //  private string firstname = "";
+      //  private string lastname = "";
 
-        public NewContactData(string firstname)
+       /* public NewContactData(string firstname)
         {
             this.firstname = firstname;
         }
-
+*/
        
         public NewContactData(string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            Firstname = firstname;
+            Lastname = lastname;
+
+            //this.firstname = firstname;
+            //this.lastname = lastname;
         }
 
        
@@ -71,30 +74,37 @@ namespace WebAddressbookTests
             return oldfirstlast.CompareTo(newfirstlast);
            // return Lastname.CompareTo(other.Lastname) ^ Firstname.CompareTo(other.Firstname); 
         }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Address { get; set; }
+        public string HomePhone { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkPhone { get; set; }
+        public object AllPhones { get; set; }
 
-        public string Firstname
-        {
-            get
-            {
-                return firstname;
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
+        /* public string Firstname
+          {
+              get
+              {
+                  return firstname;
+              }
+              set
+              {
+                  firstname = value;
+              }
+          }
 
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
-
+          public string Lastname
+          {
+              get
+              {
+                  return lastname;
+              }
+              set
+              {
+                  lastname = value;
+              }
+          }
+          */
     }
 }

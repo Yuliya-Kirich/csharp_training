@@ -33,7 +33,47 @@ namespace WebAddressbookTests
             return this;
         }
 
-        
+        internal NewContactData GetContactInformationForm(int index)
+        {
+            manager.Navigator.Gotohome();
+            InitContactModification(0);
+            string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastname = driver.FindElement(By.Name("lasttname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            return new NewContactData(firstname, lastname)
+            {
+                Address = address,
+                AllPhones = allPhones,
+                
+
+            };
+        }
+
+        internal NewContactData GetContactInformationTable(int index)
+        {
+            manager.Navigator.Gotohome();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"));
+            string lastname = cells[1].Text;  //фамилия хранится в фчейке с индексом 1
+            string firstname = cells[2].Text;
+            string address = cells[3].Text;
+            string allPhones = cells[5].Text; // все тлефоны одновременно
+
+            return new NewContactData(firstname, lastname)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone,
+
+            };
+
+        }
+
         private List<NewContactData> contactCache = null;
 
         public List<NewContactData> GetContactList()
@@ -178,7 +218,10 @@ namespace WebAddressbookTests
         {
             //driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
             // driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index) + "]")).Click(); переписано по С#
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index + 1) + "]")).Click();
+            // driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index + 1) + "]")).Click();
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
 
             return this;
         }
