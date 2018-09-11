@@ -34,7 +34,8 @@ namespace WebAddressbookTests
                 return true;
             }
 
-
+            // return Name.Equals(other.Name);
+             //return Name.Equals(other.Name,StringComparison.OrdinalIgnoreCase); // сравнивать без учета регистра
             return Name == other.Name;
         }
 
