@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -108,7 +109,8 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
+            //  return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n"; //регулярное выражение
         }
 
         /* public string Firstname
