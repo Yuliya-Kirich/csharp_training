@@ -18,9 +18,11 @@ namespace WebAddressbookTests
 
             
 
-            NewContactData contact = new NewContactData("");
+           NewContactData contact = new NewContactData("");
+
             contact.Firstname = "Елена";
             contact.Lastname = "Иванова";
+
 
 
             List<NewContactData> oldContact = app.Contact.GetContactList();

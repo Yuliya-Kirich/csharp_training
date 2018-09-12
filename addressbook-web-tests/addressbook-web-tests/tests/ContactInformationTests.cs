@@ -27,6 +27,10 @@ namespace WebAddressbookTests
             //затем смогу сравнивать данные контакта
 
             //verification
+            Assert.AreEqual(fromTable, fromForm);
+            Assert.AreEqual(fromTable.Address, fromForm.Address);
+            Assert.AreEqual(fromTable.Address, fromForm.AllPhones);
+
         }
     }
 }
