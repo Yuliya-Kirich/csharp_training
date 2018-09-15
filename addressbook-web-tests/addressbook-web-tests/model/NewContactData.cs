@@ -24,10 +24,15 @@ namespace WebAddressbookTests
         {
             Firstname = firstname;
             Lastname = lastname;
+           /* Address = address;
+            HomePhone = homePhone;
+            MobilePhone = mobilePhone;
+            WorkPhone = workPhone;
+            AllPhones = allPhones;*/
 
             //this.firstname = firstname;
             //this.lastname = lastname;
-        }
+    }
 
         public NewContactData(string v)
         {
@@ -47,7 +52,8 @@ namespace WebAddressbookTests
             }
 
             
-            return Firstname == other.Firstname && Lastname == other.Lastname;
+            return Firstname == other.Firstname 
+                && Lastname == other.Lastname;
 
             // return [Firstname == other.Firstname, Lastname == other.Lastname];
             // return Lastname == other.Lastname;
@@ -94,7 +100,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone);
+                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
                 }
             }
             set
@@ -105,11 +111,11 @@ namespace WebAddressbookTests
 
         private string CleanUp(string phone)
         {
-          if (phone == null)
+          if (phone == null || phone == "")
             {
                 return "";
             }
-            //  return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
+            //  return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
             return Regex.Replace(phone, "[ -()]", "") + "\r\n"; //регулярное выражение
         }
 
