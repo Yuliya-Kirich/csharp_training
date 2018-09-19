@@ -34,6 +34,19 @@ namespace WebAddressbookTests
             return this;
         }
 
+/*
+        internal NewContactData GetContactInformationDetails(int index)
+        {
+            manager.Navigator.Gotohome();
+            InitiateContactDetailsViewing(0);
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+                  .FindElements(By.TagName("td"));
+
+           
+
+        }
+*/
+
         public NewContactData GetContactInformationForm(int index)
         {
             manager.Navigator.Gotohome();
@@ -135,6 +148,15 @@ namespace WebAddressbookTests
         }
         */
 
+
+
+
+
+
+
+
+
+
         public ContactHelper Create(NewContactData contact)
         {
 
@@ -160,8 +182,15 @@ namespace WebAddressbookTests
             public ContactHelper FilAddNewForm(NewContactData contact)
         {
             Type(By.Name("firstname"), contact.Firstname);
-            Type(By.Name("lastname"), contact.Lastname);
-           
+            Type(By.Name("lastname"), contact.Lastname);           
+            Type(By.Name("address"), contact.Address);
+            Type(By.Name("home"), contact.HomePhone);
+            Type(By.Name("mobile"), contact.MobilePhone);
+            Type(By.Name("work"), contact.WorkPhone);           
+            Type(By.Name("email"), contact.Email);
+            Type(By.Name("email2"), contact.Email2);
+            Type(By.Name("email3"), contact.Email3);            
+
             return this;
         }
 
@@ -250,6 +279,15 @@ namespace WebAddressbookTests
             string text = driver.FindElement(By.TagName("label")).Text;
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
+        }
+
+        public ContactHelper InitiateContactDetailsViewing(int index)
+        {
+            driver.FindElement(By.CssSelector("img[alt=\"Details\"]")).Click();
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
+            return this;
         }
     }
 }

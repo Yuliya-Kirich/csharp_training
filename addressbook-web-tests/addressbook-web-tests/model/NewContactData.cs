@@ -10,6 +10,8 @@ namespace WebAddressbookTests
     public class NewContactData : IEquatable<NewContactData>, IComparable<NewContactData>
     {
         private string allPhones;
+       
+        
 
         //  private string firstname = "";
         //  private string lastname = "";
@@ -24,7 +26,7 @@ namespace WebAddressbookTests
         {
             Firstname = firstname;
             Lastname = lastname;
-           /* Address = address;
+          /* 
             HomePhone = homePhone;
             MobilePhone = mobilePhone;
             WorkPhone = workPhone;
@@ -36,6 +38,8 @@ namespace WebAddressbookTests
 
         public NewContactData(string v)
         {
+           
+          
         }
 
         public bool Equals(NewContactData other)
@@ -91,6 +95,9 @@ namespace WebAddressbookTests
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
+        public string Email { get; set; }
+        public string Email2 { get; set; }
+        public string Email3 { get; set; }
         public string AllPhones
         {
             get{

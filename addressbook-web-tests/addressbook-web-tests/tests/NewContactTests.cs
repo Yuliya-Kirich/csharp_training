@@ -22,6 +22,13 @@ namespace WebAddressbookTests
 
             contact.Firstname = "Елена";
             contact.Lastname = "Иванова";
+            contact.Address = "г. Москва, ул. Нижняя Никитская д. 17/15, кв. 13";
+            contact.HomePhone = "8 (495) 655 55";
+            contact.MobilePhone = "89250360121";
+            contact.WorkPhone = "7 (495) 171717 ";
+            contact.Email = "65555@gmail.com";
+            contact.Email2 = "65555@er.mail";
+            contact.Email3 = "65555@l.bk";
 
 
 
