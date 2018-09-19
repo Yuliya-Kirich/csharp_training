@@ -9,6 +9,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Text.RegularExpressions;
 
+
 namespace WebAddressbookTests
 {
     public class ContactHelper: HelperBase
@@ -34,18 +35,36 @@ namespace WebAddressbookTests
             return this;
         }
 
-/*
-        internal NewContactData GetContactInformationDetails(int index)
+
+        public NewContactData GetContactInformationDetails(int index)
         {
             manager.Navigator.Gotohome();
             InitiateContactDetailsViewing(0);
-            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
-                  .FindElements(By.TagName("td"));
+            //string[] nameParts = driver.FindElement(By.CssSelector("#content b: nth-child [1]")).Text.Split(' ');
+            string[] nameParts = driver.FindElement(By.CssSelector("#content b: nth-child [1]")).Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string firstname = nameParts[0];
+            string lastname = nameParts[1];
 
+            IList<IWebElement> cells = driver.FindElements(By.CssSelector("#content br: nth-of-type [1]"));
+            string allPhones = cells[1].Text;
+
+           // string address;
            
+          //  string allEmail;
+            return new NewContactData(firstname, lastname)
+            {
+              //  Address = address,
+                AllPhones = allPhones,
+                //AllEmail = allEmail;
+            };
+
+            /* IList<IWebElement> cells = driver.FindElements(By.Id("content"))[index]
+                   .FindElements(By.TagName("br"));*/
+
+
 
         }
-*/
+
 
         public NewContactData GetContactInformationForm(int index)
         {
@@ -284,9 +303,9 @@ namespace WebAddressbookTests
         public ContactHelper InitiateContactDetailsViewing(int index)
         {
             driver.FindElement(By.CssSelector("img[alt=\"Details\"]")).Click();
-            driver.FindElements(By.Name("entry"))[index]
+           /* driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[6]
-                .FindElement(By.TagName("a")).Click();
+                .FindElement(By.TagName("a")).Click();*/
             return this;
         }
     }

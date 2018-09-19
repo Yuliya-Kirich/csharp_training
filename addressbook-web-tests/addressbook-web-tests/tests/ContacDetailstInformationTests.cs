@@ -18,10 +18,10 @@ namespace WebAddressbookTests
         [Test]
 
         public void ContacDetailstInformationTest()
-        {/*
-            NewContactData fromTable = app.Contact.GetContactInformationTable(0);
+        {
+           // NewContactData fromTable = app.Contact.GetContactInformationTable(0);
             NewContactData fromDetails = app.Contact.GetContactInformationDetails(0);
-            */
+            
 
         }
     }
