@@ -30,12 +30,25 @@ namespace WebAddressbookTests
              app.Auth.Login(new AccountData("admin", "secret"));*/
         }
 
-       /* [TearDown] // метод можно удалить, т.к. осуществлен перенос
-        public void TeardownTest()
+
+        /* [TearDown] // метод можно удалить, т.к. осуществлен перенос
+         public void TeardownTest()
+         {
+            // app.Stop(); Перенесено в TestSuiteFixture
+         }
+         */
+
+        public static Random rnd = new Random();
+
+        public static string GenerateRandomString(int max)
         {
-           // app.Stop(); Перенесено в TestSuiteFixture
+            int l = Convert.ToInt32(rnd.NextDouble() * max);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < l; i++)
+            {
+                builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 223)));
+            }
+            return builder.ToString();
         }
-        */
-       
     }
 }
