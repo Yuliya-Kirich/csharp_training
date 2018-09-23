@@ -10,8 +10,10 @@ namespace WebAddressbookTests
     public class NewContactData : IEquatable<NewContactData>, IComparable<NewContactData>
     {
         private string allPhones;
-       
-        
+        private string address;
+        private string allemails;
+
+
 
         //  private string firstname = "";
         //  private string lastname = "";
@@ -34,7 +36,7 @@ namespace WebAddressbookTests
 
             //this.firstname = firstname;
             //this.lastname = lastname;
-    }
+        }
 
         public NewContactData(string v)
         {
@@ -90,14 +92,29 @@ namespace WebAddressbookTests
            // return Lastname.CompareTo(other.Lastname) ^ Firstname.CompareTo(other.Firstname); 
         }
         public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Address { get; set; }
+        public string Lastname { get; set; }       
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
         public string Email { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
+       // public string Address { get; set; }
+
+          public string Address
+          {
+              get{
+                  
+                      return CleanUpAd(address);
+                  
+              }
+              set
+              {
+                  address = value;
+              }
+          }
+
+
         public string AllPhones
         {
             get{
@@ -116,6 +133,8 @@ namespace WebAddressbookTests
             }
         }
 
+
+
         private string CleanUp(string phone)
         {
           if (phone == null || phone == "")
@@ -123,8 +142,50 @@ namespace WebAddressbookTests
                 return "";
             }
             //  return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
-            return Regex.Replace(phone, "[ -()]", "") + "\r\n"; //регулярное выражение
+            return Regex.Replace(phone, "[ -()HMW:\r]", "") + "\r\n"; //регулярное выражение
         }
+
+
+        private string CleanUpAd(string addr)
+        {
+            if (addr == null || addr == "")
+            {
+                return "";
+            }
+            //  return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+            return Regex.Replace(addr, "[\r]", "");  //регулярное выражение
+        }
+
+
+        public string AllEmails
+        {
+            get
+            {
+                if (allemails != null)
+                {
+                    return allemails;
+                }
+                else
+                {
+                    return (CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3)).Trim();
+                }
+            }
+            set
+            {
+                allemails = value;
+            }
+        }
+
+        private string CleanUpEmails(string emls)
+        {
+            if (emls == null || emls == "")
+            {
+                return "";
+            }
+            //  return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+            return Regex.Replace(emls, "[ ()!#$%^&*|?/:\r,]", "") + "\r\n"; //регулярное выражение
+        }
+
 
         /* public string Firstname
           {

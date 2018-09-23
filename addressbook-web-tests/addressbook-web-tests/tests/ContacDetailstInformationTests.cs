@@ -19,10 +19,13 @@ namespace WebAddressbookTests
 
         public void ContacDetailstInformationTest()
         {
-           // NewContactData fromTable = app.Contact.GetContactInformationTable(0);
+            NewContactData fromTable = app.Contact.GetContactInformationTable(0);
             NewContactData fromDetails = app.Contact.GetContactInformationDetails(0);
-            
 
+            Assert.AreEqual(fromTable, fromDetails);
+            Assert.AreEqual(fromTable.Address, fromDetails.Address);
+            Assert.AreEqual(fromTable.AllPhones, fromDetails.AllPhones);
+            Assert.AreEqual(fromTable.AllEmails, fromDetails.AllEmails);
         }
     }
 }

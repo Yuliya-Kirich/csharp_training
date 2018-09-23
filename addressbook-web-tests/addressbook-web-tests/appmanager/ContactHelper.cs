@@ -41,20 +41,44 @@ namespace WebAddressbookTests
             manager.Navigator.Gotohome();
             InitiateContactDetailsViewing(0);
             //string[] nameParts = driver.FindElement(By.CssSelector("#content b: nth-child [1]")).Text.Split(' ');
-            string[] nameParts = driver.FindElement(By.CssSelector("#content b: nth-child [1]")).Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string firstname = nameParts[0];
-            string lastname = nameParts[1];
+             string[] nameParts = driver.FindElement(By.CssSelector("div#content b")).Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+             string firstname = nameParts[0];
+             string lastname = nameParts[1];
 
-            IList<IWebElement> cells = driver.FindElements(By.CssSelector("#content br: nth-of-type [1]"));
-            string allPhones = cells[1].Text;
 
-           // string address;
-           
-          //  string allEmail;
+            //IList<IWebElement> cells = driver.FindElements(By.CssSelector("div#content br:nth-of-type(3)"));
+
+            //IList<IWebElement> cells = driver.FindElements(By.XPath("div [@id = 'content']/following-sibling::br[3]"));
+            //input[@id='username']/following-sibling::input[1]
+            //IList<IWebElement> cells = driver.FindElements(By.CssSelector("div#content"));            
+            // string allPhones = cells[0].Text;
+            /*  string[] namebrParts = driver.FindElement(By.CssSelector("div#content")).Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+              string address = namebrParts[12];*/
+            // string address;
+
+            //  string allEmail;
+
+            string[] namebrParts = driver.FindElement(By.CssSelector("div#content")).Text.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            string address = namebrParts[1];            
+            string homePhone = namebrParts[3];
+            string mobilePhone = namebrParts[4];
+            string workPhone = namebrParts[5];
+            string allPhones = namebrParts[3] + namebrParts[4] + namebrParts[5];
+            string email = namebrParts[7];
+            string email2 = namebrParts[8];
+            string email3 = namebrParts[9];
+            string emails = namebrParts[7] + namebrParts[8] + namebrParts[9];
+
             return new NewContactData(firstname, lastname)
             {
-              //  Address = address,
-                AllPhones = allPhones,
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone,
+                Email = email,
+                Email2 = email2,
+                Email3 = email3,
+               //llPhones = allPhones,
                 //AllEmail = allEmail;
             };
 
@@ -76,6 +100,10 @@ namespace WebAddressbookTests
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+
 
             return new NewContactData(firstname, lastname)
             {
@@ -83,8 +111,11 @@ namespace WebAddressbookTests
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone,
-
+                Email = email,
+                Email2 = email2,
+                Email3 = email3,
             };
+
         } 
 
         public NewContactData GetContactInformationTable(int index)
@@ -96,11 +127,13 @@ namespace WebAddressbookTests
             string firstname = cells[2].Text;
             string address = cells[3].Text;
             string allPhones = cells[5].Text; // все тлефоны одновременно
-            
+            string allemails = cells[4].Text;
+
             return new NewContactData(firstname, lastname)
             {
                 Address = address,
                 AllPhones = allPhones,
+                AllEmails = allemails,
             };
 
         }

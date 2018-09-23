@@ -34,6 +34,7 @@ namespace WebAddressbookTests
             options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
             options.UseLegacyImplementation = true;
             driver = new FirefoxDriver(options);
+            driver.Manage().Window.Maximize();
             baseURL = "http://localhost/";
 
             loginHelper = new LoginHelper(this);
