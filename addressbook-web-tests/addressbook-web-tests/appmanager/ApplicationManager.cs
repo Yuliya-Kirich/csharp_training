@@ -35,7 +35,8 @@ namespace WebAddressbookTests
             options.UseLegacyImplementation = true;
             driver = new FirefoxDriver(options);
             driver.Manage().Window.Maximize();
-            baseURL = "http://localhost/";
+            //  baseURL = "http://localhost/";
+            baseURL = "http://localhost:81/";
 
             loginHelper = new LoginHelper(this);
             navigator = new NavigatorHelper(this, baseURL);
