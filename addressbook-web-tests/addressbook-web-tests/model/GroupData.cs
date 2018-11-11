@@ -15,10 +15,16 @@ namespace WebAddressbookTests
       //  private string header = ""; поле можно убрать, оно будет создаваться автоматически(если name{ get; set; })
         //private string footer = ""; поле можно убрать, оно будет создаваться автоматически(если name{ get; set; })
 
-        public GroupData(string name)
+        public GroupData(/*string name*/) //для xml конструктор, который не принимает никаких параметров
         {
             //this.name = name; //заменим присваивание поля в присваивание в свойство
-            Name = name;
+           // Name = name;
+        }
+
+        public GroupData(string name) 
+        {
+            //this.name = name; //заменим присваивание поля в присваивание в свойство
+             Name = name;
         }
 
         public bool Equals(GroupData other)
